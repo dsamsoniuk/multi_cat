@@ -1,0 +1,82 @@
+
+body {
+    /* background-color: bisque; */
+}
+
+.square {
+    /* background-color: grey; */
+    /* background-image: url("../image/mouse.png"); */
+    background-color:grey;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;    
+    width: 20px;
+    height: 20px;
+
+    display: block;
+    position: absolute;
+} 
+#square2 {
+    background-color: grey;
+    /* background-image: url("../image/mouse.png"); */
+    background-repeat: no-repeat;
+    background-size: 20px 20px;    
+    width: 20px;
+    height: 20px;
+
+    display: block;
+    position: absolute;
+} 
+
+#score_box {
+    position: absolute;
+    bottom: 50;
+    left: 0;
+    background-color: #a1bad8;
+    padding:5px;
+
+}
+
+#info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #c0e6a3;
+    padding:5px;
+}
+
+.block {
+    width: 20px;
+    height:20px;
+    position: absolute;
+    display: block;
+}
+
+.stone {
+    background-color: pink;
+
+    /* background-color: grey; */
+    /* background-image: url("../image/rock.jpg"); */
+    background-repeat: no-repeat;
+    background-size: 20px 20px;    
+}
+
+.water {
+    background-image: url("../image/wave.png");
+    background-repeat: no-repeat;
+    background-size: 25px 25px;    
+}
+.gold {
+    background-color: goldenrod;
+
+    /* background-image: url("../image/coin_gold.gif"); */
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+}
+
+#box_start {
+    position: absolute;
+    bottom: 0;
+    left: 100px;
+    background-color: #c0e6a3;
+    padding:5px;
+}
