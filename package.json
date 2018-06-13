@@ -1,0 +1,19 @@
+{
+  "name": "node_testy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "formidable": "^1.2.1",
+    "jQuery": "^1.7.4",
+    "jsdom": "^11.11.0",
+    "mysql": "^2.15.0",
+    "upper-case": "^1.1.3",
+    "websocket": "^1.0.26"
+  }
+}
