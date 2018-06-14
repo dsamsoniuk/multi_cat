@@ -57,29 +57,35 @@ var block = {
 
 
  window.movePlayer = function(username, key) {
+     console.log("ruszam:",username,key)
+     if (!username) {
+        return true;
+    }
+    console.log("przechodze dalej")
     if (key == 37) { //lewa strzalka
-        placeBox(0,-1,username,key);
+        window.placeBox(0,-1,username,key);
     }
     else if (key == 39) { // prawa strzalka
-        placeBox(0,1,username,key);
+        window.placeBox(0,1,username,key);
     }
     else if (key == 40) { // strzalka w dol
-        placeBox(1,0,username,key);
+        window.placeBox(1,0,username,key);
     }
     else if (key == 38) { // strzalka w gore
-        placeBox(-1,0,username,key);
+        window.placeBox(-1,0,username,key);
     }
 }
 
 
-function placeBox(top,left,username,key) {
+window.placeBox = function (top,left,username,key) {
 
-    if (!username) {
-        return;
-    }
-    
     var element = document.getElementById("username_"+username);
+    // console.log(element)
+    if (!element) {
+        return true;
+    }
     var rect    = element.getBoundingClientRect();
+
     var x       = rect.left + (left * jump);
     var y       = rect.top + (top * jump);
 console.log("przesuwam:",x,y,username);
@@ -96,14 +102,21 @@ console.log("przesuwam:",x,y,username);
 }
 
 
-window.createUser = function(name) {
-    var position_start  = [48,28]; // left, top
-    var new_user = 'username_'+name;
-    if (!$("#"+new_user).length) {
-        var box             = '<div id="'+new_user+'" class="square" style="left:'+position_start[0]+'px; top:'+position_start[1]+'px;"></div>';
-        $('body').append(box);
-    }
+window.createUser = function(names) {
+    var i;
+    for (i=0; i<names.length; i++) {
 
+        var position_start  = [48,28]; // left, top
+        var new_user        = 'username_'+ names[i];
+
+        // console.log("tworze:"+new_user,$("#"+new_user));
+
+        if (!$("#"+new_user).length) {
+            var box = '<div id="'+new_user+'" class="square" style="left:'+position_start[0]+'px; top:'+position_start[1]+'px;"></div>';
+            $('body').append(box);
+        }
+
+    }
 }
 
 

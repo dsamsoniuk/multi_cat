@@ -50,25 +50,28 @@ $(function () {
       // always returns JSON this should work without any problem but
       // we should make sure that the massage is not chunked or
       // otherwise damaged.
+
       try {
 
         var json = JSON.parse(message.data);
         console.log(json);
         // movePlayer(username, 37);
         if (json.type === 'color') {
-          console.log(json.users);
-          var i;
-          for (i=0; i<json.users.length; i++ ) {
-            var user_name = json.users[i];
+          // console.log(json.users);
+          // var i;
+          // for (i=0; i<json.users.length; i++ ) {
+          //   var user_name = json.users[i];
             // console.log("robie",user_name)
-            window.createUser(user_name);
-          }
+            window.createUser(json.users);
+          // }
         }
         if (json.type === 'message') {
           var user_name = json.data.author;
           if (user_name != window.username) {
-            console.log("nie sa rowne")
+            // console.log("nie sa rowne")
             window.movePlayer(user_name, json.data.move);
+
+            window.createUser(json.users);
           }
         }
 
