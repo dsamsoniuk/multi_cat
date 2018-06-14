@@ -56,23 +56,31 @@ $(function () {
         var json = JSON.parse(message.data);
         console.log(json);
         // movePlayer(username, 37);
-        if (json.type === 'color') {
-          // console.log(json.users);
+        if (json.type === 'new_user') {
+          console.log("new_user",json.users);
           // var i;
           // for (i=0; i<json.users.length; i++ ) {
           //   var user_name = json.users[i];
             // console.log("robie",user_name)
-            window.createUser(json.users);
+            // window.createUser(json.user_data);
+
           // }
         }
         if (json.type === 'message') {
-          var user_name = json.data.author;
-          if (user_name != window.username) {
-            // console.log("nie sa rowne")
-            window.movePlayer(user_name, json.data.move);
+          console.log("message", json)
+          // var user_name = json.user_data.author;
+          // if (user_name != window.currentUser.nick) {
+          //   console.log("nie sa rowne")
+          //   var i;
+          //   // for (i=0;i<json.users.length; i++)
+          //   window.movePlayer(user_name, "", json.user_data.position);
+          // } 
+ 
+          window.createUser(json.users);
+          for (i=0;i<json.users.length; i++)
+          window.movePlayer(json.users[i].nick, "", json.users[i].position);
 
-            window.createUser(json.users);
-          }
+        
         }
 
       } catch (e) {

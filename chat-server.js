@@ -23,6 +23,7 @@ var history = [ ];
 // list of currently connected clients (users)
 var clients = [ ];
 var users_nick = [ ];
+var users = [ ];
 /**
  * Helper function for escaping input strings
  */
@@ -76,42 +77,55 @@ wsServer.on('request', function(request) {
   }
 
 
-
   // user sent some message
   connection.on('message', function(message) {
     var data = JSON.parse(message.utf8Data);
 
-
+console.log(data)
     if (message.type === 'utf8') { // accept only text
     // first message sent by user is their name
      if (userName === false) {
         // remember user name
         // userName = htmlEntities(message.utf8Data);
-        userName = data.username;
+        userName = data.user_data.nick;
         users_nick.push(userName);
         // get random color and send it back to the user
         userColor = colors.shift();
-        connection.sendUTF( JSON.stringify({ type:'color', data: userColor, users: users_nick }));
+
+        users.push(data.user_data);
+        connection.sendUTF( JSON.stringify({ type:'new_user', data: userColor, users: users_nick, user_data : data.user_data }));
 
         console.log((new Date()) + ' User is known as: ' + userName + ' with ' + userColor + ' color.');
       } else { // log and broadcast the message
 
-        console.log((new Date()) + ' Received Message from ' + userName + ': ' + message.utf8Data.msg);
+        console.log((new Date()) + ' Received Message from ' + data.user_data.nick );
         
         // we want to keep history of all sent messages
-        var obj = {
-          time: (new Date()).getTime(),
-          // text: htmlEntities(message.utf8Data),
-          text: "jakis tekst niewazne",
-          move : data.move,
-          author: userName,
-          color: userColor
-        };
-        history.push(obj);
-        history = history.slice(-100);
+        // var obj = {
+        //   time: (new Date()).getTime(),
+        //   // text: htmlEntities(message.utf8Data),
+        //   text: "jakis tekst niewazne",
+        //   move : data.move,
+        //   author: userName,
+        //   color: userColor,
+
+        // };
+        // history.push(obj);
+        // history = history.slice(-100);
+        var i;
+        for (i=0; i<users.length; i++) {
+          // console.log("porownanie:",users[i].nick,data.user_data.nick)
+          if (users[i].nick == data.user_data.nick) {
+            // console.log("pozycje:",users[i].position,data.user_data.position)
+
+            users[i].position = data.user_data.position;
+            break;
+          }
+        }
+
         // broadcast message to all connected clients
-        var json = JSON.stringify({ type:'message', data: obj, users: users_nick });
-        for (var i=0; i < clients.length; i++) {
+        var json = JSON.stringify({ type:'message', users: users_nick, users : users, user_data : data.user_data });
+        for (var i = 0; i < clients.length; i++) {
           clients[i].sendUTF(json);
         }
       }

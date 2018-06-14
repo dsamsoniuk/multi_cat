@@ -56,63 +56,78 @@ var block = {
 }
 
 
- window.movePlayer = function(username, key) {
-     console.log("ruszam:",username,key)
+ window.movePlayer = function(username, key, position) {
+     console.log("ruszam:",username,key,position)
      if (!username) {
         return true;
     }
-    console.log("przechodze dalej")
-    if (key == 37) { //lewa strzalka
-        window.placeBox(0,-1,username,key);
+    if (position) {
+        console.log("jest pozycja zmoenia po niej")
+        window.placeBox(0,0,username,position);
+    }
+    else if (key == 37) { //lewa strzalka
+        window.placeBox(0,-1,username,position);
     }
     else if (key == 39) { // prawa strzalka
-        window.placeBox(0,1,username,key);
+        window.placeBox(0,1,username,position);
     }
     else if (key == 40) { // strzalka w dol
-        window.placeBox(1,0,username,key);
+        window.placeBox(1,0,username,position);
     }
     else if (key == 38) { // strzalka w gore
-        window.placeBox(-1,0,username,key);
+        window.placeBox(-1,0,username,position);
     }
+
 }
 
 
-window.placeBox = function (top,left,username,key) {
+window.placeBox = function (top,left,username,position) {
 
     var element = document.getElementById("username_"+username);
-    // console.log(element)
+
     if (!element) {
         return true;
     }
+    
+    var x,y;
     var rect    = element.getBoundingClientRect();
-
-    var x       = rect.left + (left * jump);
-    var y       = rect.top + (top * jump);
-console.log("przesuwam:",x,y,username);
+    if (position) {
+        x = position.x;
+        y = position.y;
+    } else {
+        x = rect.left + (left * jump);
+        y = rect.top + (top * jump);
+    }
+// console.log("przesuwam:",x,y,username);
     if (block.over(y,x)) {
         return;
     }
-    if (left) {
+    if (x) {
         element.style.left = x + 'px';
     }
-    if (top) {
+    if (y) {
         element.style.top  = y + 'px';
     }
-
+    if (username == window.currentUser.nick) {
+        window.currentUser.position.x = x;
+        window.currentUser.position.y = y;
+    }
 }
 
 
-window.createUser = function(names) {
+window.createUser = function(users) {
     var i;
-    for (i=0; i<names.length; i++) {
+    console.log(users)
 
+    for (i=0; i<users.length; i++) {
         var position_start  = [48,28]; // left, top
-        var new_user        = 'username_'+ names[i];
+        var new_user        = 'username_'+ users[i].nick;
 
-        // console.log("tworze:"+new_user,$("#"+new_user));
 
         if (!$("#"+new_user).length) {
-            var box = '<div id="'+new_user+'" class="square" style="left:'+position_start[0]+'px; top:'+position_start[1]+'px;"></div>';
+            console.log("tworze uzytkownika :"+new_user);
+
+            var box = '<div id="' + new_user + '" class="square" style="left:' + users[i].position.x + 'px; top:' + users[i].position.x + 'px;"></div>';
             $('body').append(box);
         }
 
