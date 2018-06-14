@@ -63,25 +63,25 @@ var block = {
     }
     if (position) {
         console.log("jest pozycja zmoenia po niej")
-        window.placeBox(0,0,username,position);
+        window.moveBox(0,0,username,position);
     }
     else if (key == 37) { //lewa strzalka
-        window.placeBox(0,-1,username,position);
+        window.moveBox(0,-1,username,position);
     }
     else if (key == 39) { // prawa strzalka
-        window.placeBox(0,1,username,position);
+        window.moveBox(0,1,username,position);
     }
     else if (key == 40) { // strzalka w dol
-        window.placeBox(1,0,username,position);
+        window.moveBox(1,0,username,position);
     }
     else if (key == 38) { // strzalka w gore
-        window.placeBox(-1,0,username,position);
+        window.moveBox(-1,0,username,position);
     }
 
 }
 
 
-window.placeBox = function (top,left,username,position) {
+window.moveBox = function (top,left,username,position) {
 
     var element = document.getElementById("username_"+username);
 

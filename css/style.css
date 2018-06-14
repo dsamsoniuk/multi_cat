@@ -5,8 +5,8 @@ body {
 
 .square {
     /* background-color: grey; */
-    /* background-image: url("../image/mouse.png"); */
-    background-color:grey;
+    background-image: url("../image/mouse.png");
+    /* background-color:grey; */
     background-repeat: no-repeat;
     background-size: 20px 20px;    
     width: 20px;
@@ -16,8 +16,8 @@ body {
     position: absolute;
 } 
 #square2 {
-    background-color: grey;
-    /* background-image: url("../image/mouse.png"); */
+    /* background-color: grey; */
+    background-image: url("../image/mouse.png");
     background-repeat: no-repeat;
     background-size: 20px 20px;    
     width: 20px;
@@ -52,10 +52,10 @@ body {
 }
 
 .stone {
-    background-color: pink;
+    /* background-color: pink; */
 
     /* background-color: grey; */
-    /* background-image: url("../image/rock.jpg"); */
+    background-image: url("../image/rock.jpg");
     background-repeat: no-repeat;
     background-size: 20px 20px;    
 }
@@ -66,9 +66,9 @@ body {
     background-size: 25px 25px;    
 }
 .gold {
-    background-color: goldenrod;
+    /* background-color: goldenrod; */
 
-    /* background-image: url("../image/coin_gold.gif"); */
+    background-image: url("../image/coin_gold.gif");
     background-repeat: no-repeat;
     background-size: 20px 20px;
 }
